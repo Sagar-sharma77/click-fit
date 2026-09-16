@@ -1,0 +1,169 @@
+/* =========================================================
+   GLOBAL / VARIABLES
+   ========================================================= */
+:root {
+  --cf-dark:   #111827;
+  --cf-accent: #f59e0b;   /* the amber/yellow accent */
+  --cf-light:  #f9fafb;
+}
+
+html {
+  scroll-behavior: smooth;   /* smooth scrolling when clicking nav links */
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* push content down so the fixed navbar doesn't cover it */
+  padding-top: 56px;
+  overflow-x: hidden;        /* prevents horizontal scroll from animations */
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  transition: background-color .3s ease, box-shadow .3s ease;
+}
+.navbar.scrolled {
+  background-color: rgba(17, 24, 39, 0.95) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+
+/* =========================================================
+   HERO  — with a slow zoom + fade-in entrance
+   ========================================================= */
+.hero {
+  min-height: 92vh;
+  background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.75)),
+    url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1920&q=80')
+    center/cover no-repeat;
+  position: relative;
+  animation: heroZoom 12s ease-in-out infinite alternate;
+}
+
+/* the slow background zoom */
+@keyframes heroZoom {
+  from { background-size: 100%; }
+  to   { background-size: 110%; }
+}
+
+/* text entrance — fades up on load */
+.hero-title,
+.hero-subtitle,
+.hero .btn {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp .9s ease forwards;
+}
+.hero-subtitle { animation-delay: .25s; }
+.hero .btn    { animation-delay: .5s;  }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+/* .section-heading {
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+} */
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--cf-accent);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+/* =========================================================
+   PROGRAM CARDS
+   ========================================================= */
+.program-card {
+  transition: transform .3s ease, box-shadow .3s ease;
+  border: none;
+}
+.program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15) !important;
+}
+.program-card .display-4 {
+  transition: transform .3s ease;
+}
+.program-card:hover .display-4 {
+  transform: scale(1.2) rotate(-6deg);
+}
+
+/* =========================================================
+   DROP ZONE (image upload)
+   ========================================================= */
+.drop-zone {
+  max-width: 640px;
+  padding: 60px 20px;
+  border: 3px dashed #cbd5e1;
+  border-radius: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color .25s, background-color .25s, transform .25s;
+}
+.drop-zone:hover,
+.drop-zone:focus {
+  border-color: var(--cf-accent);
+  background: #fffbeb;
+  outline: none;
+}
+.drop-zone.dragover {
+  border-color: var(--cf-accent);
+  background: #fef3c7;
+  transform: scale(1.02);
+}
+
+/* =========================================================
+   SCROLL-REVEAL  (used by JS via IntersectionObserver)
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   API CARDS
+   ========================================================= */
+.api-card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.api-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+
+/* =========================================================
+   UPLOAD PREVIEW THUMBS
+   ========================================================= */
+.preview-thumb {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  animation: popIn .4s ease;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.6); }
+  to   { opacity: 1; transform: scale(1);  }
+}
